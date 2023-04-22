@@ -1,0 +1,89 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.ml.e_bookreader'
+    compileSdk 31
+
+    defaultConfig {
+        applicationId "com.ml.novelreader"
+        minSdk 20
+        targetSdk 31
+        versionCode 1
+        versionName "1.0"
+        //数据库自动升级
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += [
+                        "room.schemaLocation":"$projectDir/schemas".toString(),
+                        "room.incremental":"true",
+                        "room.expandProjection":"true"]
+            }
+        }
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+}
+
+dependencies {
+//    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+
+    implementation 'com.google.android.material:material:1.8.0'
+// 导入这里出了点问题
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.11'
+
+    //add libs 添加libs
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+
+
+
+
+    //room database Room数据库框架
+//    implementation "androidx.room:room-runtime:2.5.0"
+//    annotationProcessor "androidx.room:room-compiler:2.5.0"
+    implementation "androidx.room:room-runtime:2.4.2"
+    androidTestImplementation 'junit:junit:4.12'
+    annotationProcessor "androidx.room:room-compiler:2.4.2"
+
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
+    implementation 'com.airbnb.android:lottie:5.2.0'
+    implementation 'com.github.bumptech.glide:glide:4.15.0'
+    implementation 'com.guolindev.permissionx:permissionx:1.7.1'
+    //JSoup
+    implementation 'org.jsoup:jsoup:1.15.3'
+    implementation 'cn.wanghaomiao:JsoupXpath:2.5.1'
+    implementation 'com.jayway.jsonpath:json-path:2.7.0'
+    //epub
+    implementation('com.positiondev.epublib:epublib-core:3.1') {
+        exclude group: 'org.slf4j'
+        exclude group: 'xmlpull'
+    }
+    //
+    //编码识别
+    implementation 'com.github.albfernandez:juniversalchardet:2.4.0'
+    implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
+    //简繁转换
+    implementation 'com.luhuiguo:chinese-utils:1.0'
+    //颜色选择
+    implementation 'com.jaredrummler:colorpicker:1.1.0'
+    implementation 'com.google.code.gson:gson:2.9.0'
+}
